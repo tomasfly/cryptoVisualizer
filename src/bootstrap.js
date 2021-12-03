@@ -12,7 +12,11 @@ class Bootstrap {
     params
     usdtList
 
-    constructor(timeframe, candlesNumber){
+    constructor(timeframe, candlesNumber) {
+        if (!timeframe || !candlesNumber) {
+            throw new Error("No params provided")
+        }
+
         this.timeframe = timeframe
         this.candlesNumber = candlesNumber
         this.params = ` timeframe is ${timeframe} and candlesNumber is ${candlesNumber}`
