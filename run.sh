@@ -4,6 +4,6 @@ CANDLES=$2
 
 while [ true ]
 do
-    yarn getcoins
-    yarn start $TIMEFRAME $CANDLES
+    npm run getcoins
+    npm run start $TIMEFRAME $CANDLES
 done
