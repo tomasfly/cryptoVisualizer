@@ -19,7 +19,7 @@ class TaapiExchange {
             res = await exchangeData.getCandles("binance", `${symbol}/USDT`, timeframe, 0, candlesNumber);
         }
         catch (e) {
-            console.log(e)
+            //console.log(e)
         }
         return res
     }
