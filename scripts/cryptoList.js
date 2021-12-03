@@ -37,5 +37,5 @@ class CryptoList {
     }
 }
 
-CryptoList.getFullList()
+CryptoList.getListUSDT()
 // export default CryptoList
