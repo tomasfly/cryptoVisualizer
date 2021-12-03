@@ -7,8 +7,16 @@ import './lib/taapi'
 
 class Bootstrap {
 
-    timeframe = "1m"
-    candlesNumber = 10
+    timeframe
+    candlesNumber
+    params
+
+    constructor(timeframe, candlesNumber){
+        this.timeframe = timeframe
+        this.candlesNumber = candlesNumber
+        this.params = ` timeframe is ${timeframe} and candlesNumber is ${candlesNumber}`
+    }
+
     async launch() {
         console.log("launching".yellow)
         // Iterate through list of coins 
@@ -33,15 +41,15 @@ class Bootstrap {
                     if (volumeInfo.isVolumeHigher) {
                         // logic to print different colors
                         if (volumeInfo.percentageIncrement > 250.0 && volumeInfo.percentageIncrement < 500.0) {
-                            console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 250 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}`.green)
+                            console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 250 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${this.params}`.green)
                         }
 
                         if (volumeInfo.percentageIncrement > 500.0 && volumeInfo.percentageIncrement < 1000.0) {
-                            console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 500 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}`.yellow)
+                            console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 500 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${this.params}`.yellow)
                         }
 
                         if (volumeInfo.percentageIncrement > 1000.0 && volumeInfo.percentageIncrement) {
-                            console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 1000 ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}`.red)
+                            console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 1000 ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${this.params}`.red)
                         }
                     }
                 }
