@@ -27,7 +27,7 @@ class Volume {
             let volumeIncrementPercentage = this.getVolumeIncrementPercentage(volumeList, lastVolume)
             // create VolumeAnalysis instance
             let isVolumeHigher = lastVolume > volumeIncrementPercentage
-            volumeInfo = new VolumeAnalysis(coin, isVolumeHigher, volumeIncrementPercentage, timeframe)
+            volumeInfo = new VolumeAnalysis(coin, isVolumeHigher, volumeIncrementPercentage, timeframe, lastVolume)
         }
 
         return volumeInfo
