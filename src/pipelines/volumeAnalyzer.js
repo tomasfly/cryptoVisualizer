@@ -3,16 +3,16 @@ import TaapiExchange from '../lib/taapiExchange'
 var colors = require('colors')
 
 class VolumeAnalyzerPipeline {
-    static async iterateThroughCoins(timeframe, candlesNumber, params, usdtList) {
-        console.log(`Starting to Analyze the volume of ${usdtList.length} coins at ${new Date().toISOString()} with params timeframe: ${timeframe} candlesNumber:${candlesNumber}`)
+    static async iterateThroughCoins(interval, length, params, usdtList) {
+        console.log(`Starting to Analyze the volume of ${usdtList.length} coins at ${new Date().toISOString()} with params interval: ${interval} length:${length}`)
         for (let index = 0; index < usdtList.length; index++) {
             let volume = new Volume()
             let volumeInfo
-            let response = await TaapiExchange.getCandlesAsync(usdtList[index], timeframe, candlesNumber)
+            let response = await TaapiExchange.getCandlesAsync(usdtList[index], interval, length)
             if (response) {
-                volumeInfo = volume.getVolume(response, usdtList[index], timeframe)
+                volumeInfo = volume.getVolume(response, usdtList[index], interval)
             }
-            //log Volume only if actual volume is higher compared with the average of the last {candlesNumber}
+            //log Volume only if actual volume is higher compared with the average of the last {length}
             if (volumeInfo) {
                 if (volumeInfo.isVolumeHigher) {
                     // logic to print different colors

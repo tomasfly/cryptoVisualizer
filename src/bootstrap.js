@@ -7,25 +7,35 @@ import SMACrossAnalyzerPipeline from './pipelines/smaCrossAnalyzer'
 
 class Bootstrap {
 
-    timeframe
-    candlesNumber
+    interval
+    length
     params
     usdtList
+    analysis
 
-    constructor(timeframe, candlesNumber) {
-        if (!timeframe || !candlesNumber) {
+    constructor(interval, length, analysis) {
+        if (!interval || !length) {
             throw new Error("No params provided")
         }
-        this.timeframe = timeframe
-        this.candlesNumber = candlesNumber
-        this.params = ` timeframe is ${timeframe} and candlesNumber is ${candlesNumber}`
+        this.interval = interval
+        this.length = length
+        this.params = ` interval is ${interval} and length is ${length}`
         this.usdtList = JSON.parse(fs.readFileSync('allTargets', 'utf8'));
+        this.analysis = analysis
     }
 
     async launch() {
         console.log("Launching Crypto Analyzer".yellow)
-        // await VolumeAnalyzerPipeline.iterateThroughCoins(this.timeframe, this.candlesNumber, this.params, this.usdtList)
-        await SMACrossAnalyzerPipeline.iterateThroughCoins({ indicator: "sma", timeframe: this.timeframe, length: this.candlesNumber })
+        switch (this.analysis) {
+            case 'VolumeAnalyzer':
+                await VolumeAnalyzerPipeline.iterateThroughCoins(this.interval, this.length, this.params, this.usdtList)
+                break
+            case 'SMAAnalyzer':
+                await SMACrossAnalyzerPipeline.iterateThroughCoins({ indicator: "sma", interval: this.interval, length: this.length })
+                break
+            default:
+                throw new Error(`There is no analysis implemented for parameter ${analysis}`)
+        }
         console.log("Done running pipeline".yellow)
     }
 }

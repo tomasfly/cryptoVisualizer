@@ -7,13 +7,13 @@ class Taapi {
     Taapi() { }
 
     // Async version
-    static async getIndicatorAsync({ indicator: indicator, exchange: exchange, coin: coin, timeframe: timeframe, length: length }) {
-        return await client.getIndicator(indicator, exchange, `${coin}/USDT`, timeframe, { optInTimePeriod: length })
+    static async getIndicatorAsync({ indicator: indicator, exchange: exchange, coin: coin, interval: interval, length: length }) {
+        return await client.getIndicator(indicator, exchange, `${coin}/USDT`, interval, { optInTimePeriod: length })
     }
 
     // Same function but with promise resolve
-    // static getIndicator({ indicator: indicator, exchange: exchange, coin: coin, timeframe: timeframe }) {
-    //     client.getIndicator(indicator, exchange, `${coin}/USDT`, timeframe).then(function (result) {
+    // static getIndicator({ indicator: indicator, exchange: exchange, coin: coin, interval: interval }) {
+    //     client.getIndicator(indicator, exchange, `${coin}/USDT`, interval).then(function (result) {
     //         console.log("Result: ", result);
     //     }).catch(function (error) {
     //         console.error(error);

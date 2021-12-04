@@ -13,10 +13,10 @@ class TaapiExchange {
         });
     }
 
-    static async getCandlesAsync(symbol, timeframe, candlesNumber) {
+    static async getCandlesAsync(symbol, interval, length) {
         let res
         try {
-            res = await exchangeData.getCandles("binance", `${symbol}/USDT`, timeframe, 0, candlesNumber);
+            res = await exchangeData.getCandles("binance", `${symbol}/USDT`, interval, 0, length);
         }
         catch (e) {
             //console.log(e)
