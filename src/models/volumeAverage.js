@@ -3,15 +3,15 @@ class VolumeAnalysis {
     coin
     isVolumeHigher
     percentageIncrement
-    timeFrame
+    interval
     averageVolume
     lastVolume
 
-    constructor(coin, isVolumeHigher, percentageIncrement, timeFrame, lastVolume) {
+    constructor(coin, isVolumeHigher, percentageIncrement, interval, lastVolume) {
         this.coin = coin
         this.isVolumeHigher = isVolumeHigher
         this.percentageIncrement = percentageIncrement
-        this.timeFrame = timeFrame
+        this.interval = interval
         this.lastVolume = lastVolume
     }
 }
