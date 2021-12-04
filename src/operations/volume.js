@@ -1,6 +1,6 @@
 import VolumeAnalysis from "../models/volumeAverage";
 
-class Volume {   
+class Volume {
 
     getVolumeList(response) {
         let volumeList = []
@@ -10,7 +10,7 @@ class Volume {
         return volumeList
     }
 
-    getVolume(response, coin, timeframe) {
+    getVolume(response, coin, interval) {
         // Fill up array with volumes for this coin
         let volumeList
         let count
@@ -21,13 +21,12 @@ class Volume {
 
         count = volumeList.length
 
-        if (count > 0)
-        {
+        if (count > 0) {
             lastVolume = volumeList.pop(count)
             let volumeIncrementPercentage = this.getVolumeIncrementPercentage(volumeList, lastVolume)
             // create VolumeAnalysis instance
             let isVolumeHigher = lastVolume > volumeIncrementPercentage
-            volumeInfo = new VolumeAnalysis(coin, isVolumeHigher, volumeIncrementPercentage, timeframe, lastVolume)
+            volumeInfo = new VolumeAnalysis(coin, isVolumeHigher, volumeIncrementPercentage, interval, lastVolume)
         }
 
         return volumeInfo
