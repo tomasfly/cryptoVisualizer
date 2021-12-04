@@ -2,6 +2,7 @@ var colors = require('colors');
 import './lib/taapi'
 var fs = require('fs');
 import VolumeAnalyzerPipeline from './pipelines/volumeAnalyzer'
+import SMACrossAnalyzerPipeline from './pipelines/smaCrossAnalyzer'
 
 
 class Bootstrap {
@@ -23,7 +24,9 @@ class Bootstrap {
 
     async launch() {
         console.log("Launching Crypto Analyzer".yellow)
-        await VolumeAnalyzerPipeline.iterateThroughCoins(this.timeframe, this.candlesNumber, this.params, this.usdtList)
+        // await VolumeAnalyzerPipeline.iterateThroughCoins(this.timeframe, this.candlesNumber, this.params, this.usdtList)
+        await SMACrossAnalyzerPipeline.iterateThroughCoins({ indicator: "sma", timeframe: this.timeframe, length: this.candlesNumber })
+        console.log("Done running pipeline".yellow)
     }
 }
 
