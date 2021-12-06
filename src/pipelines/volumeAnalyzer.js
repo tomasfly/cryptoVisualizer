@@ -41,19 +41,19 @@ class VolumeAnalyzerPipeline {
                     if (volumeInfo.percentageIncrement > 250.0 && volumeInfo.percentageIncrement < 500.0) {
                         let alertLog = `[INFO ${new Date().toISOString()}] VALUE LARGER THAN 250 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`
                         console.log(alertLog.green)
-                        if (dbClient) this.storeAlert(dbClient, volumeInfo)
+                        if (dbClient) this.storeAlert(dbClient, volumeInfo,alertLog)
                     }
 
                     if (volumeInfo.percentageIncrement > 500.0 && volumeInfo.percentageIncrement < 1000.0) {
                         let alertLog = `[INFO ${new Date().toISOString()}] VALUE LARGER THAN 500 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`
                         console.log(alertLog.yellow)
-                        if (dbClient) this.storeAlert(dbClient, volumeInfo)
+                        if (dbClient) this.storeAlert(dbClient, volumeInfo,alertLog)
                     }
 
                     if (volumeInfo.percentageIncrement > 1000.0 && volumeInfo.percentageIncrement) {
                         let alertLog = `[INFO ${new Date().toISOString()}] VALUE LARGER THAN 1000 ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`
                         console.log(alertLog.red)
-                        if (dbClient) this.storeAlert(dbClient, volumeInfo)
+                        if (dbClient) this.storeAlert(dbClient, volumeInfo,alertLog)
                     }
                 }
             }
