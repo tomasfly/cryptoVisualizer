@@ -1,9 +1,28 @@
 import Volume from "../operations/volume"
 import TaapiExchange from '../lib/taapiExchange'
+import VolumeAlert from '../models/volumeAlert'
 var colors = require('colors')
 
 class VolumeAnalyzerPipeline {
-    static async iterateThroughCoins(interval, length, params, usdtList) {
+
+    static async storeAlert(dbClient, volumeInfo, alertLog) {
+        if (dbClient) {
+            try {
+                // this store object with more info
+                // {"_id":{"$oid":"61add69d1081b8fb847562b4"},"coin":"NBS","isVolumeHigher":true,"percentageIncrement":{"$numberDouble":"2488.194845881574"},"interval":"1m","averageVolume":null,"lastVolume":{"$numberDouble":"1261605.8"},"timestamp":{"$numberDouble":"1.6387826206100E+12"}}
+                await dbClient.addOneMinuteVolumeAlert(volumeInfo)
+                // add just a string of what we log in console
+                // Create alert object first and then add it to Mongodb
+                let volumeAlert = new VolumeAlert(alertLog)
+                await dbClient.addAlertLog(volumeAlert)
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+    }
+
+    static async iterateThroughCoins(interval, length, params, usdtList, dbClient = null) {
         console.log(`Starting to Analyze the volume of ${usdtList.length} coins at ${new Date().toISOString()} with params interval: ${interval} length:${length}`)
         for (let index = 0; index < usdtList.length; index++) {
             let volume = new Volume()
@@ -14,18 +33,27 @@ class VolumeAnalyzerPipeline {
             }
             //log Volume only if actual volume is higher compared with the average of the last {length}
             if (volumeInfo) {
+
+
                 if (volumeInfo.isVolumeHigher) {
+
                     // logic to print different colors
                     if (volumeInfo.percentageIncrement > 250.0 && volumeInfo.percentageIncrement < 500.0) {
-                        console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 250 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`.green)
+                        let alertLog = `[INFO ${new Date().toISOString()}] VALUE LARGER THAN 250 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`
+                        console.log(alertLog.green)
+                        if (dbClient) this.storeAlert(dbClient, volumeInfo,alertLog)
                     }
 
                     if (volumeInfo.percentageIncrement > 500.0 && volumeInfo.percentageIncrement < 1000.0) {
-                        console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 500 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`.yellow)
+                        let alertLog = `[INFO ${new Date().toISOString()}] VALUE LARGER THAN 500 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`
+                        console.log(alertLog.yellow)
+                        if (dbClient) this.storeAlert(dbClient, volumeInfo,alertLog)
                     }
 
                     if (volumeInfo.percentageIncrement > 1000.0 && volumeInfo.percentageIncrement) {
-                        console.log(`[INFO ${new Date().toISOString()}] VALUE LARGER THAN 1000 ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`.red)
+                        let alertLog = `[INFO ${new Date().toISOString()}] VALUE LARGER THAN 1000 ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`
+                        console.log(alertLog.red)
+                        if (dbClient) this.storeAlert(dbClient, volumeInfo,alertLog)
                     }
                 }
             }
