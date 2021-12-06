@@ -6,6 +6,7 @@ class VolumeAnalysis {
     interval
     averageVolume
     lastVolume
+    timestamp
 
     constructor(coin, isVolumeHigher, percentageIncrement, interval, lastVolume) {
         this.coin = coin
@@ -13,6 +14,7 @@ class VolumeAnalysis {
         this.percentageIncrement = percentageIncrement
         this.interval = interval
         this.lastVolume = lastVolume
+        this.timestamp = Date.now()
     }
 }
 
