@@ -5,6 +5,6 @@ ANALYZER=$3
 
 while [ true ]
 do
-    npm run getcoins
-    npm run start $INTERVAL $LENGTH $ANALYZER
+    timeout 120 npm run getcoins
+    timeout 900 npm run start $INTERVAL $LENGTH $ANALYZER
 done
