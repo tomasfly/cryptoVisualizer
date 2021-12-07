@@ -7,7 +7,6 @@ class MongoDB {
     client
 
     constructor() {
-        this.client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     }
 
     // this one adds an what we log in the console. Something like:
@@ -16,7 +15,12 @@ class MongoDB {
     async addAlertLog(log) {
 
         try {
-            this.client = await MongoClient.connect(uri, { useNewUrlParser: true }).catch(err => { console.log(err); });
+            this.client = await MongoClient.connect(uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                tls: true,
+                tlsCAFile: "./ca-certificate.crt"
+            }).catch(err => { console.log(err); });
             let db = this.client.db("test")
             let col = db.collection("log")
             let insertValue = { log: log, timestamp: Date.now() }
@@ -32,7 +36,12 @@ class MongoDB {
     async addOneMinuteVolumeAlert(volumeAlert) {
 
         try {
-            this.client = await MongoClient.connect(uri, { useNewUrlParser: true }).catch(err => { console.log(err); });
+            this.client = await MongoClient.connect(uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                tls: true,
+                tlsCAFile: "./ca-certificate.crt"
+            }).catch(err => { console.log(err); });
             let db = this.client.db("test")
             let col = db.collection("alerts")
             await col.insertOne(volumeAlert)
