@@ -48,6 +48,7 @@ class VolumeAnalyzerPipeline {
                     if (volumeInfo.percentageIncrement > 500.0 && volumeInfo.percentageIncrement < 1000.0) {
                         let alertLog = `[INFO ${new Date().toISOString()}] VALUE LARGER THAN 500 for ${volumeInfo.coin} with an incremental percentage value of ${volumeInfo.percentageIncrement}${params}`
                         console.log(alertLog.yellow)
+                        // Commenting this for now. It will make it less verbose
                         // if (dbClient) this.storeAlert(dbClient, volumeInfo,alertLog)
                     }
 

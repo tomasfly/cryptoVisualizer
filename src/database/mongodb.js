@@ -30,6 +30,36 @@ class MongoDB {
         }
     }
 
+    async updateRSIValue(rsiInfo) {
+        let client
+        try {
+            client = await MongoClient.connect(uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                tls: true,
+                tlsCAFile: "./ca-certificate.crt"
+            }).catch(err => { console.log(err); });
+            let db = client.db('test')
+            let col = db.collection("rsi")
+            await col.updateOne(
+                {
+                    coin: rsiInfo.coin,
+                    interval: rsiInfo.interval
+                },
+                {
+                    $set: {
+                        rsi: rsiInfo.rsi
+                    }
+                },
+                {
+                    upsert: true
+                }
+            )
+        } finally {
+            await client.close()
+        }
+    }
+
     // this one adds an object
     async addOneMinuteVolumeAlert(volumeAlert) {
         let client
