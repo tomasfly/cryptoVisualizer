@@ -30,6 +30,37 @@ class MongoDB {
         }
     }
 
+    async updateSMAValue(smaInfo) {
+        // Stores difference between 20 and 50 SMAs
+        let client
+        try {
+            client = await MongoClient.connect(uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                tls: true,
+                tlsCAFile: "./ca-certificate.crt"
+            }).catch(err => { console.log(err); });
+            let db = client.db('test')
+            let col = db.collection("sma")
+            await col.updateOne(
+                {
+                    coin: smaInfo.coin,
+                    interval: smaInfo.interval
+                },
+                {
+                    $set: {
+                        smaDifference: smaInfo.smasDifference
+                    }
+                },
+                {
+                    upsert: true
+                }
+            )
+        } finally {
+            await client.close()
+        }
+    }
+
     async updateRSIValue(rsiInfo) {
         let client
         try {

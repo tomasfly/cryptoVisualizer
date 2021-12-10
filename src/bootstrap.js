@@ -36,7 +36,8 @@ class Bootstrap {
                 break
             case 'SMAAnalyzer':
                 // This one is under construction. Would be nice to leave it running to detect golden crosses
-                await SMACrossAnalyzerPipeline.iterateThroughCoins({ indicator: "sma", interval: this.interval, length: this.length })
+                // Under construction!!!!!
+                await SMACrossAnalyzerPipeline.iterateThroughCoins({ indicator: "sma", interval: this.interval, usdtList: this.usdtList, dbClient: this.dbclient })
                 break
             case 'RSIAnalyzer':
                 await RSIAnalyzer.iterateThroughCoins({ indicator: "rsi", interval: this.interval, length: this.length, usdtList: this.usdtList, dbClient: this.dbclient })
