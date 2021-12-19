@@ -16,10 +16,8 @@ class MongoDB {
         let client
         try {
             client = await MongoClient.connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                tls: true,
-                tlsCAFile: "./ca-certificate.crt"
+                sslKey: "./ca-certificate.crt",
+                sslCert: "./ca-certificate.crt"
             }).catch(err => { console.log(err); });
             let db = client.db('test')
             let col = db.collection("log")
@@ -35,10 +33,8 @@ class MongoDB {
         let client
         try {
             client = await MongoClient.connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                tls: true,
-                tlsCAFile: "./ca-certificate.crt"
+                sslKey: "./ca-certificate.crt",
+                sslCert: "./ca-certificate.crt"
             }).catch(err => { console.log(err); });
             let db = client.db('test')
             let col = db.collection("sma")
@@ -65,10 +61,8 @@ class MongoDB {
         let client
         try {
             client = await MongoClient.connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                tls: true,
-                tlsCAFile: "./ca-certificate.crt"
+                sslKey: "./ca-certificate.crt",
+                sslCert: "./ca-certificate.crt"
             }).catch(err => { console.log(err); });
             let db = client.db('test')
             let col = db.collection("rsi")
@@ -96,10 +90,8 @@ class MongoDB {
         let client
         try {
             client = await MongoClient.connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                tls: true,
-                tlsCAFile: "./ca-certificate.crt"
+                sslKey: "./ca-certificate.crt",
+                sslCert: "./ca-certificate.crt"
             }).catch(err => { console.log(err); });
             let db = client.db("test")
             let col = db.collection("alerts")
