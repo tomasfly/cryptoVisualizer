@@ -17,5 +17,5 @@ do
     ssh root@$i -i .ssh/digital-ocean-ssh 'node -v'
     scp -i .ssh/digital-ocean-ssh -r cryptoVisualizer/  root@$i:/root
     ssh root@$i -i .ssh/digital-ocean-ssh 'cd cryptoVisualizer && npm install'
-    ssh root@$i -i .ssh/digital-ocean-ssh 'cd cryptoVisualizer && bash run.sh "15m" 10 VolumeAnalyzer > output.log &' & 
+    ssh root@$i -i .ssh/digital-ocean-ssh 'cd cryptoVisualizer && bash run.sh "1h" 10 RSIAnalyzer > output.log &' & 
 done
