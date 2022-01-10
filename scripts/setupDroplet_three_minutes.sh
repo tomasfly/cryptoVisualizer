@@ -1,9 +1,9 @@
 #!/bin/bash
 # List the ips of the droplets here
 # If using mongoDB Atlas. Select : Allow access from anywhere. This will prevent to having to add all IPs from droplets
-# 1 IP here
+# 8 IPs here
 
-for i in 137.184.198.15
+for i in 157.245.247.66
 do
 	ssh -oStrictHostKeyChecking=no root@$i -i .ssh/digital-ocean-ssh 'sudo apt update'
     ssh root@$i -i .ssh/digital-ocean-ssh 'sudo apt install nodejs -y'
@@ -17,5 +17,5 @@ do
     ssh root@$i -i .ssh/digital-ocean-ssh 'node -v'
     scp -i .ssh/digital-ocean-ssh -r cryptoVisualizer/  root@$i:/root
     ssh root@$i -i .ssh/digital-ocean-ssh 'cd cryptoVisualizer && npm install'
-    ssh root@$i -i .ssh/digital-ocean-ssh 'cd cryptoVisualizer && bash run.sh "1h" 10 VolumeAnalyzer > output.log &' & 
+    ssh root@$i -i .ssh/digital-ocean-ssh 'cd cryptoVisualizer && bash run.sh "3m" 10 VolumeAnalyzer > output.log &' & 
 done

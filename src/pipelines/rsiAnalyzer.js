@@ -1,5 +1,4 @@
 import Taapi from '../lib/taapi'
-var colors = require('colors')
 
 class RSIAnalyzer {
 

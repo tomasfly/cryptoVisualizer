@@ -1,6 +1,5 @@
 import Taapi from '../lib/taapi'
 import SMACalculations from '../operations/SMACalculations'
-var colors = require('colors')
 
 // Leaving this for now. These golden crosses look good backtested with 1D candles but it will depend if market is bullish or bearish. Not so reliable as expected 
 class SMACrossAnalyzerPipeline {
@@ -33,7 +32,7 @@ class SMACrossAnalyzerPipeline {
 
                 this.storeAlert(dbClient, { smasDifference: diff, interval: interval, coin: usdtList[index] })
 
-                console.log(`The difference for ${usdtList[index]} between 20 sma and 50 sma with interval ${interval} is ${diff}`.red)
+                console.log(`The difference for ${usdtList[index]} between 20 sma and 50 sma with interval ${interval} is ${diff}`)
             }
             catch (e) {
                 console.log(e)

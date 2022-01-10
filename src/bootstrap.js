@@ -4,7 +4,6 @@ import VolumeAnalyzerPipeline from './pipelines/volumeAnalyzer'
 import SMACrossAnalyzerPipeline from './pipelines/smaCrossAnalyzer'
 import RSIAnalyzer from './pipelines/rsiAnalyzer'
 import MongoDB from './database/mongodb'
-var colors = require('colors');
 
 
 class Bootstrap {
@@ -29,7 +28,7 @@ class Bootstrap {
     }
 
     async launch() {
-        console.log("Launching Crypto Analyzer".yellow)
+        console.log("Launching Crypto Analyzer")
         switch (this.analysis) {
             case 'VolumeAnalyzer':
                 await VolumeAnalyzerPipeline.iterateThroughCoins(this.interval, this.length, this.params, this.usdtList, this.dbclient)
@@ -45,7 +44,7 @@ class Bootstrap {
             default:
                 throw new Error(`There is no analysis implemented for parameter ${analysis}`)
         }
-        console.log("Done running pipeline".yellow)
+        console.log("Done running pipeline")
     }
 }
 
