@@ -3,7 +3,7 @@
 # If using mongoDB Atlas. Select : Allow access from anywhere. This will prevent to having to add all IPs from droplets
 # 1 IP here
 
-for i in 137.184.198.15
+for i in 159.223.164.195
 do
 	ssh -oStrictHostKeyChecking=no root@$i -i .ssh/digital-ocean-ssh 'sudo apt update'
     ssh root@$i -i .ssh/digital-ocean-ssh 'sudo apt install nodejs -y'
