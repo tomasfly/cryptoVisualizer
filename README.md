@@ -42,6 +42,9 @@ This code was tested using Digital Ocean but could be used using any cloud servi
    2. Then it will iterate through all the coins and store the value in MongoDb.
    3. Once it finishes iterating coins, it will gather again the list of coins from binance and start iterating again.
 
+## Showing lists in the front end
+The frontend part was decoupled from this project and added in https://github.com/tomasfly/CryptoVisualizer-FE
+
 ## Further changes
 I would appreciate that you fork this project and add more funcionalities. Some of the things that could be added are:
 
