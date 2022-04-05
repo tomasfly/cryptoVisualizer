@@ -26,6 +26,7 @@ class VolumeAnalyzerPipeline {
         for (let index = 0; index < usdtList.length; index++) {
             let volume = new Volume()
             let volumeInfo
+            // Bring candles from stock exchange
             let response = await TaapiExchange.getCandlesAsync(usdtList[index], interval, length)
             if (response) {
                 volumeInfo = volume.getVolume(response, usdtList[index], interval)
