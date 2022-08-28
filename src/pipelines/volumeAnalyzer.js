@@ -28,6 +28,7 @@ class VolumeAnalyzerPipeline {
             let volumeInfo
             // Bring candles from stock exchange
             let response = await TaapiExchange.getCandlesAsync(usdtList[index], interval, length)
+            console.log(response)
             if (response) {
                 volumeInfo = volume.getVolume(response, usdtList[index], interval)
             }
